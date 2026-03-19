@@ -1,1 +1,11 @@
-<p>categories-list works!</p>
+@for (groupBlock of groupedCategories(); track $index) {
+  <section>
+    <h3>{{ groupBlock.group?.name || 'Sans groupe' }}</h3>
+
+    @for (category of groupBlock.categories; track category.id) {
+      <app-category-card [category]="category"></app-category-card>
+    }
+  </section>
+} @empty {
+  <p>Aucune catégorie visible</p>
+}

@@ -1,1 +1,5 @@
-<p>category-card works!</p>
+<article style="padding: 12px; border: 1px solid #ddd; margin-bottom: 8px;">
+  <h4>{{ category().wording }}</h4>
+  <p>Id : {{ category().id }}</p>
+  <p>{{ category().description || 'Aucune description' }}</p>
+</article>

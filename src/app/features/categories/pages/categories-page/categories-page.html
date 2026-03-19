@@ -1,5 +1,6 @@
-<h2>All categories</h2>
-<pre>{{ allCategories.length }}</pre>
-
-<h2>Visible categories</h2>
-<pre>{{ visibleCategories.length }}</pre>
+<h2>Catégories visibles regroupées</h2>
+@if (isLoading()) {
+  <p>Chargement...</p>
+} @else {
+  <app-categories-list [groupedCategories]="groupedCategories"></app-categories-list>
+}
