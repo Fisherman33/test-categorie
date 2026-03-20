@@ -12,4 +12,5 @@ import { Category } from '../../models/category.model';
 })
 export class CategoryCard {
     readonly category = input.required<Category>();
+    readonly isAlphabeticalMode = input(false);
 }

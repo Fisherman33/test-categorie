@@ -1,1 +1,19 @@
-<p>categories-filters works!</p>
+<div style="display: flex; gap: 12px; margin: 16px;">
+  <input
+    type="text"
+    placeholder="Rechercher une catégorie"
+    [value]="searchTerm()"
+    (input)="onSearch($any($event.target).value)"/>
+
+  <select
+    [value]="selectedGroupId() ?? ''"
+    (change)="onGroupChange($any($event.target).value)">
+    <option value="">Tous les groupes de catégories</option>
+
+    @for (group of availableGroups(); track group.id) {
+      <option [value]="group.id">
+        {{ group.name }}
+      </option>
+    }
+  </select>
+</div>

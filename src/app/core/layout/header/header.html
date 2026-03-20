@@ -1,1 +1,25 @@
-<p>header works!</p>
+<header class="app-header">
+  <h1 class="app-header__title">Catégories</h1>
+
+  <div class="app-header__actions">
+    <button
+      type="button"
+      class="header-mode-button"
+      [class.header-mode-button--active]="!filtersState.sortAlphabetically()"
+      (click)="setGroupedMode()"
+    >
+      <span class="header-mode-button__icon"></span>
+      <span>Groupe de catégorie</span>
+    </button>
+
+    <button
+      type="button"
+      class="header-mode-button"
+      [class.header-mode-button--active]="filtersState.sortAlphabetically()"
+      (click)="setAlphabeticalMode()"
+    >
+      <span class="header-mode-button__icon">↓ A Z</span>
+      <span>Ordre alphabétique</span>
+    </button>
+  </div>
+</header>

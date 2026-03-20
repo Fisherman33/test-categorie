@@ -1,5 +1,10 @@
-<article style="padding: 12px; border: 1px solid #ddd; margin-bottom: 8px;">
-  <h4>{{ category().wording }}</h4>
-  <p>Id : {{ category().id }}</p>
-  <p>{{ category().description || 'Aucune description' }}</p>
+<article class="category-card" [class.category-card--alphabetical]="isAlphabeticalMode()">
+  @if (isAlphabeticalMode()) {
+    <h4 class="category-card__group">{{ category().group?.name }}</h4>
+  }
+
+  <h4 class="category-card__title">{{ category().wording }}</h4>
+  <p class="category-card__description">
+    {{ category().description || 'Aucune description' }}
+  </p>
 </article>
