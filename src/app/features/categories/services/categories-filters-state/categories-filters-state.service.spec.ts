@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CategoriesFiltersStateService } from './categories-filters-state';
+import { CategoriesFiltersStateService } from './categories-filters-state.service';
 
 describe('CategoriesFiltersState', () => {
   let service: CategoriesFiltersStateService;

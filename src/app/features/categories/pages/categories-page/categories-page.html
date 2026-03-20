@@ -15,7 +15,10 @@
         @for (category of alphabeticalCategories(); track category.id) {
           <app-category-card
             [category]="category"
-            [isAlphabeticalMode]="true">
+            [isAlphabeticalMode]="true"
+            [selected]="selectionState.selectedCategory()?.id === category.id"
+            [consulted]="selectionState.consultedCategoryIds().includes(category.id)"
+            (categorySelected)="onCategorySelected($event)">
           </app-category-card>
         }
       </div>
@@ -25,7 +28,10 @@
   } @else {
     @if (displayedGroupedCategories().length) {
       <app-categories-list
-        [groupedCategories]="displayedGroupedCategories()">
+        [groupedCategories]="displayedGroupedCategories()"
+        [selectedCategoryId]="selectionState.selectedCategory()?.id ?? null"
+        [consultedCategoryIds]="selectionState.consultedCategoryIds()"
+        (categorySelected)="onCategorySelected($event)">
       </app-categories-list>
     } @else {
       <p>Aucune catégorie trouvée</p>

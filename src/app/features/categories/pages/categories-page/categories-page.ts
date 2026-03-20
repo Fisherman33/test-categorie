@@ -7,9 +7,10 @@ import { Category } from '../../models/category.model';
 import { VisibleCategory } from '../../models/visible-category.model';
 import { CategoryGroup } from '../../models/category-group.model';
 import { CategoriesList } from "../../components/categories-list/categories-list";
-import { CategoriesFiltersStateService } from '../../services/categories-filters-state/categories-filters-state';
+import { CategoriesFiltersStateService } from '../../services/categories-filters-state/categories-filters-state.service';
 import { CategoryCard } from "../../components/category-card/category-card";
 import { CategoriesFilters } from "../../components/categories-filters/categories-filters";
+import { CategoriesSelectionStateService } from '../../services/categories-selection-state/categories-selection-state.service';
 
 export interface GroupedCategories {
   group: CategoryGroup | null;
@@ -36,6 +37,8 @@ export class CategoriesPage implements OnInit {
   readonly searchTerm = signal('');
   readonly displayedGroupedCategories = signal<GroupedCategories[]>([]);
   readonly alphabeticalCategories = signal<Category[]>([]);
+  readonly selectedCategory = signal<Category | null>(null);
+  readonly selectionState = inject(CategoriesSelectionStateService);
   readonly isLoading = signal(true);
 
   readonly availableGroups = computed(() =>
@@ -143,6 +146,16 @@ export class CategoriesPage implements OnInit {
       .filter((groupBlock: GroupedCategories) => groupBlock.categories.length > 0);
 
     this.displayedGroupedCategories.set(filteredGroups);
+    
+    const visibleCategoryIds = filteredGroups
+      .flatMap((groupBlock: GroupedCategories) => groupBlock.categories)
+      .map((category: Category) => category.id);
+
+    const selectedCategory = this.selectionState.selectedCategory();
+
+    if (selectedCategory && !visibleCategoryIds.includes(selectedCategory.id)) {
+      this.selectionState.clearSelection();
+    }
 
     if (sortAlphabetically) {
       const flatCategories = filteredGroups
@@ -155,5 +168,9 @@ export class CategoriesPage implements OnInit {
     } else {
       this.alphabeticalCategories.set([]);
     }
+  }
+
+  onCategorySelected(category: Category): void {
+    this.selectionState.selectCategory(category);
   }
 }

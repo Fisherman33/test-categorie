@@ -1,10 +1,17 @@
 @for (groupBlock of groupedCategories(); track $index) {
-  <section>
+  <section style="margin-bottom: 24px;">
     <h3>{{ groupBlock.group?.name || 'Sans groupe' }}</h3>
 
-    @for (category of groupBlock.categories; track category.id) {
-      <app-category-card [category]="category"></app-category-card>
-    }
+    <div>
+      @for (category of groupBlock.categories; track category.id) {
+        <app-category-card
+          [category]="category"
+          [selected]="selectedCategoryId() === category.id"
+          [consulted]="consultedCategoryIds().includes(category.id)"
+          (categorySelected)="onCategorySelected($event)"
+        ></app-category-card>
+      }
+    </div>
   </section>
 } @empty {
   <p>Aucune catégorie visible</p>

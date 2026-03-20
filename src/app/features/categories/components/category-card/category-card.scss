@@ -2,18 +2,36 @@
     padding: 12px;
     border: 0.5px solid #ddd;
     height: -webkit-fill-available;
+    background: #fff;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.category-card--selected {
+    border: 0.5px solid #1697e6;
+    background: #1696e617;
+}
+
+.category-card--consulted {
+  background: #f4f5f6;
+  border-color: #bfc6ce;
+}
+
+.category-card--consulted.category-card--selected {
+  background: #1696e617;
+  border: 0.5px solid #1697e6;
 }
 
 .category-card__group {
-  margin: 0 0 6px;
-  font-size: 0.95rem;
-  color: #6b7280;
+    margin: 0 0 6px;
+    font-size: 0.95rem;
+    color: #6b7280;
 }
 
 .category-card__title {
-  margin: 0 0 8px;
+    margin: 0 0 8px;
 }
 
 .category-card__description {
-  margin: 0;
+    margin: 0;
 }

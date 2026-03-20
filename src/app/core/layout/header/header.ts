@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CategoriesFiltersStateService } from '../../../features/categories/services/categories-filters-state/categories-filters-state';
+import { CategoriesFiltersStateService } from '../../../features/categories/services/categories-filters-state/categories-filters-state.service';
 
 @Component({
   selector: 'app-header',

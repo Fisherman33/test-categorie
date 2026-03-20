@@ -1,0 +1,21 @@
+.app-footer {
+  padding: 16px 24px;
+  border-top: 1px solid #eee;
+  background: #fff;
+}
+
+.app-footer__button {
+  min-width: 220px;
+  height: 30px;
+  border: none;
+  border-radius: 3px;
+  background: #1697e6;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.app-footer__button:disabled {
+  background: #cfd8dc;
+  cursor: not-allowed;
+}

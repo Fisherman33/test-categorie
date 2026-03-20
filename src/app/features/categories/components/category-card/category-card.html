@@ -1,4 +1,10 @@
-<article class="category-card" [class.category-card--alphabetical]="isAlphabeticalMode()">
+<article
+  class="category-card"
+  [class.category-card--selected]="selected()"
+  [class.category-card--consulted]="consulted()"
+  [class.category-card--alphabetical]="isAlphabeticalMode()"
+  (click)="onSelect()"
+>
   @if (isAlphabeticalMode()) {
     <h4 class="category-card__group">{{ category().group?.name }}</h4>
   }
