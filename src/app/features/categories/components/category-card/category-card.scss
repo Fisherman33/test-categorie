@@ -1,37 +1,45 @@
 .category-card {
-    padding: 12px;
-    border: 0.5px solid #ddd;
-    height: -webkit-fill-available;
-    background: #fff;
-    cursor: pointer;
-    transition: background 0.2s ease, border-color 0.2s ease;
+  padding: 15px 15px;
+  height: -webkit-fill-available;
+  background: var(--color-surface);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.category-card:hover {
+  background: var(--color-surface-hover);
 }
 
 .category-card--selected {
-    border: 0.5px solid #1697e6;
-    background: #1696e617;
+  border: 0.5px solid var(--color-primary);
+  border-left: 1px solid var(--color-primary);
+  border-right: 1px solid var(--color-primary);
+  background: var(--color-primary-soft);
 }
 
 .category-card--consulted {
-  background: #f4f5f6;
-  border-color: #bfc6ce;
+  background: var(--color-surface-hover);
 }
 
 .category-card--consulted.category-card--selected {
-  background: #1696e617;
-  border: 0.5px solid #1697e6;
+  background: var(--color-primary-soft);
+  border: 0.5px solid var(--color-primary);
 }
 
 .category-card__group {
-    margin: 0 0 6px;
-    font-size: 0.95rem;
-    color: #6b7280;
+  margin: 0 0 6px;
+  font-size: 0.65rem;
 }
 
 .category-card__title {
-    margin: 0 0 8px;
+  margin: 0 0 6px;
+  font-size: medium;
+  font-family: var(--font-heading);
+  font-weight: 700;
 }
 
 .category-card__description {
-    margin: 0;
+  margin: 0;
+  font-size: medium;
+  color: var(--color-text-muted);
 }

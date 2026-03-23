@@ -1,1 +1,116 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  /* Fonts */
+  --font-body: 'Open Sans', sans-serif;
+  --font-heading: 'Eina03-SemiBold', sans-serif;
+
+  /* Layout / neutrals */
+  --color-page-bg: #f3f5f8;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f3f5f8;
+  --color-border: #d9e1e7;
+  --color-text-muted: #636970;
+  --color-text-default: #163041;
+  --color-border-soft: #d2dbe3;
+  --color-border-hover: #bcc9d4;
+  --color-focus: #9fc8e6;
+  --color-primary-hover: #0f86d0;
+  --color-header-button-text: #5d7282;
+  --color-header-button-active-bg: #f1f7fc;
+  --color-header-button-hover-bg: #e6edf2;
+
+  /* Primary / selection */
+  --color-primary: #11abec;
+  --color-primary-soft: #1696e617;
+
+  /* Badge colors */
+  --color-pink-bg: #ffece6;
+  --color-pink-text: #fd755f;
+
+  --color-green-bg: #edf8f2;
+  --color-green-text: #1d6b45;
+
+  --color-blue-bg: #edf6fc;
+  --color-blue-text: #084c75;
+
+  --color-purple-bg: #f4f0fb;
+  --color-purple-text: #5a378d;
+
+  --color-red-bg: #fdf1f0;
+  --color-red-text: #9f2d24;
+
+  --color-grey-bg: #f3f4f6;
+  --color-grey-text: #4b5563;
+
+  /* Radius */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-pill: 999px;
+}
+
+html,
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background-color: var(--color-page-bg);
+  color: var(--color-text-default);
+}
+
+input,
+select,
+button,
+textarea,
+p,
+span,
+label,
+li,
+a {
+  font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.category-card__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+}
+
+.m-pink {
+  background: var(--color-pink-bg);
+  color: var(--color-pink-text);
+}
+
+.m-green {
+  background: var(--color-green-bg);
+  color: var(--color-green-text);
+}
+
+.m-blue {
+  background: var(--color-blue-bg);
+  color: var(--color-blue-text);
+}
+
+.m-purple {
+  background: var(--color-purple-bg);
+  color: var(--color-purple-text);
+}
+
+.m-red {
+  background: var(--color-red-bg);
+  color: var(--color-red-text);
+}
+
+.m-grey {
+  background: var(--color-grey-bg);
+  color: var(--color-grey-text);
+}

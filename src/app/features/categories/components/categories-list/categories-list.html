@@ -1,18 +1,22 @@
-@for (groupBlock of groupedCategories(); track $index) {
-  <section style="margin-bottom: 24px;">
-    <h3>{{ groupBlock.group?.name || 'Sans groupe' }}</h3>
+<div class="categories-table">
+  @for (groupBlock of groupedCategories(); track $index) {
+    <section class="categories-table__section">
+      <div class="categories-table__group-label" [ngClass]="groupBlock.group?.color || 'm-grey'">
+        {{ groupBlock.group?.name || 'Sans groupe' }}
+      </div>
 
-    <div>
-      @for (category of groupBlock.categories; track category.id) {
-        <app-category-card
-          [category]="category"
-          [selected]="selectedCategoryId() === category.id"
-          [consulted]="consultedCategoryIds().includes(category.id)"
-          (categorySelected)="onCategorySelected($event)"
-        ></app-category-card>
-      }
-    </div>
-  </section>
-} @empty {
+      <div class="categories-table__grid">
+        @for (category of groupBlock.categories; track category.id) {
+          <app-category-card
+            [category]="category"
+            [selected]="selectedCategoryId() === category.id"
+            [consulted]="consultedCategoryIds().includes(category.id)"
+            (categorySelected)="onCategorySelected($event)"
+          ></app-category-card>
+        }
+      </div>
+    </section>
+  } @empty {
   <p>Aucune catégorie visible</p>
-}
+} 
+</div>

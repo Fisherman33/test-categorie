@@ -1,11 +1,26 @@
-<div style="display: flex; gap: 12px; margin: 16px;">
-  <input
-    type="text"
-    placeholder="Rechercher une catégorie"
-    [value]="searchTerm()"
-    (input)="onSearch($any($event.target).value)"/>
+<div class="categories-filters">
+  <label class="sr-only" for="category-search">Rechercher une catégorie</label>
+  <div class="categories-filters__search">
+    <span class="categories-filters__search-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="M20 20l-3.5-3.5"></path>
+      </svg>
+    </span>
 
+    <input
+      id="category-search"
+      name="categorySearch"
+      type="text"
+      placeholder="Rechercher une catégorie"
+      [value]="searchTerm()"
+      (input)="onSearch($any($event.target).value)" />
+  </div>
+
+  <label class="sr-only" for="category-group">Filtrer par groupe de catégories</label>
   <select
+    id="category-group"
+    name="categoryGroup"
     [value]="selectedGroupId() ?? ''"
     (change)="onGroupChange($any($event.target).value)">
     <option value="">Tous les groupes de catégories</option>

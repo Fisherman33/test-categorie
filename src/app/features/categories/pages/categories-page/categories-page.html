@@ -1,40 +1,42 @@
-@if (isLoading()) {
-  <p>Chargement...</p>
-} @else {
-    <app-categories-filters
-    [searchTerm]="searchTerm()"
-    [selectedGroupId]="filtersState.selectedGroupId()"
-    [availableGroups]="availableGroups()"
-    (searchTermChange)="onSearchTermChange($event)"
-    (selectedGroupIdChange)="onSelectedGroupChange($event)">
-    </app-categories-filters>
-
-  @if (filtersState.sortAlphabetically()) {
-    @if (alphabeticalCategories().length) {
-      <div class="categories-grid categories-grid--alphabetical">
-        @for (category of alphabeticalCategories(); track category.id) {
-          <app-category-card
-            [category]="category"
-            [isAlphabeticalMode]="true"
-            [selected]="selectionState.selectedCategory()?.id === category.id"
-            [consulted]="selectionState.consultedCategoryIds().includes(category.id)"
-            (categorySelected)="onCategorySelected($event)">
-          </app-category-card>
-        }
-      </div>
-    } @else {
-      <p>Aucune catégorie trouvée</p>
-    }
+<div class="app-categories-page">
+  @if (isLoading()) {
+    <p>Chargement...</p>
   } @else {
-    @if (displayedGroupedCategories().length) {
-      <app-categories-list
-        [groupedCategories]="displayedGroupedCategories()"
-        [selectedCategoryId]="selectionState.selectedCategory()?.id ?? null"
-        [consultedCategoryIds]="selectionState.consultedCategoryIds()"
-        (categorySelected)="onCategorySelected($event)">
-      </app-categories-list>
+      <app-categories-filters
+      [searchTerm]="searchTerm()"
+      [selectedGroupId]="filtersState.selectedGroupId()"
+      [availableGroups]="availableGroups()"
+      (searchTermChange)="onSearchTermChange($event)"
+      (selectedGroupIdChange)="onSelectedGroupChange($event)">
+      </app-categories-filters>
+
+    @if (filtersState.sortAlphabetically()) {
+      @if (alphabeticalCategories().length) {
+        <div class="categories-grid">
+          @for (category of alphabeticalCategories(); track category.id) {
+            <app-category-card
+              [category]="category"
+              [isAlphabeticalMode]="true"
+              [selected]="selectionState.selectedCategory()?.id === category.id"
+              [consulted]="selectionState.consultedCategoryIds().includes(category.id)"
+              (categorySelected)="onCategorySelected($event)">
+            </app-category-card>
+          }
+        </div>
+      } @else {
+        <p>Aucune catégorie trouvée</p>
+      }
     } @else {
-      <p>Aucune catégorie trouvée</p>
+      @if (displayedGroupedCategories().length) {
+        <app-categories-list
+          [groupedCategories]="displayedGroupedCategories()"
+          [selectedCategoryId]="selectionState.selectedCategory()?.id ?? null"
+          [consultedCategoryIds]="selectionState.consultedCategoryIds()"
+          (categorySelected)="onCategorySelected($event)">
+        </app-categories-list>
+      } @else {
+        <p>Aucune catégorie trouvée</p>
+      }
     }
   }
-}
+</div>

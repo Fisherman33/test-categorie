@@ -2,14 +2,13 @@
   class="category-card"
   [class.category-card--selected]="selected()"
   [class.category-card--consulted]="consulted()"
-  [class.category-card--alphabetical]="isAlphabeticalMode()"
-  (click)="onSelect()"
->
+  (click)="onSelect()">
+  
   @if (isAlphabeticalMode()) {
-    <h4 class="category-card__group">{{ category().group?.name }}</h4>
+    <p class="category-card__group category-card__badge" [ngClass]="category().group?.color || 'm-grey'">{{ category().group?.name }}</p>
   }
 
-  <h4 class="category-card__title">{{ category().wording }}</h4>
+  <p class="category-card__title">{{ category().wording }}</p>
   <p class="category-card__description">
     {{ category().description || 'Aucune description' }}
   </p>
