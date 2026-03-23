@@ -28,25 +28,35 @@ export class CategoriesPage implements OnInit {
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly categoriesApi = inject(CategoriesApiService);
   public readonly filtersState = inject(CategoriesFiltersStateService);
+  readonly selectionState = inject(CategoriesSelectionStateService);
 
   allCategories: Category[] = [];
   visibleCategories: VisibleCategory[] = [];
   filteredCategories: Category[] = [];
 
+  // Données groupées par groupe de catégorie
   readonly groupedCategories = signal<GroupedCategories[]>([]);
+
+  // Valeur de recherche saisie par l'utilisateur
   readonly searchTerm = signal('');
+
+  // Données affichées selon les filtres actifs
   readonly displayedGroupedCategories = signal<GroupedCategories[]>([]);
+
+  // Liste utilisée pour l'affichage alphabétique
   readonly alphabeticalCategories = signal<Category[]>([]);
+
   readonly selectedCategory = signal<Category | null>(null);
-  readonly selectionState = inject(CategoriesSelectionStateService);
   readonly isLoading = signal(true);
 
+  // Liste des groupes disponibles pour le filtre
   readonly availableGroups = computed(() =>
     this.groupedCategories()
       .map((groupBlock: GroupedCategories) => groupBlock.group)
       .filter((group: CategoryGroup | null): group is CategoryGroup => group !== null)
   );
 
+  // Réapplique les filtres quand le mode d'affichage change
   private readonly filtersEffect = effect(() => {
     this.filtersState.sortAlphabetically();
 
@@ -60,6 +70,7 @@ export class CategoriesPage implements OnInit {
     this.loadCategoriesData();
   }
 
+  // Charge toutes les catégories + les catégories visibles
   private loadCategoriesData(): void {
     forkJoin({
       allCategories: this.categoriesApi.getAllCategories(),
@@ -79,6 +90,7 @@ export class CategoriesPage implements OnInit {
     });
   }
 
+  // Garde uniquement les catégories visibles puis les regroupe
   private updateVisibleAndGroupedCategories(): void {
     if (!this.allCategories.length || !this.visibleCategories.length) {
       return;
@@ -111,16 +123,19 @@ export class CategoriesPage implements OnInit {
     this.cdr.detectChanges();
   }
 
+  // Mise à jour de la recherche texte
   onSearchTermChange(value: string): void {
     this.searchTerm.set(value);
     this.applyFilters();
   }
 
+  // Mise à jour du groupe sélectionné
   onSelectedGroupChange(groupId: number | null): void {
     this.filtersState.setSelectedGroupId(groupId);
     this.applyFilters();
   }
 
+  // Applique les filtres puis prépare l'affichage
   private applyFilters(): void {
     const search = this.searchTerm().trim().toLowerCase();
     const selectedGroupId = this.filtersState.selectedGroupId();
@@ -146,17 +161,19 @@ export class CategoriesPage implements OnInit {
       .filter((groupBlock: GroupedCategories) => groupBlock.categories.length > 0);
 
     this.displayedGroupedCategories.set(filteredGroups);
-    
+
     const visibleCategoryIds = filteredGroups
       .flatMap((groupBlock: GroupedCategories) => groupBlock.categories)
       .map((category: Category) => category.id);
 
     const selectedCategory = this.selectionState.selectedCategory();
 
+    // Si la catégorie sélectionnée n'est plus visible après filtrage, on la désélectionne
     if (selectedCategory && !visibleCategoryIds.includes(selectedCategory.id)) {
       this.selectionState.clearSelection();
     }
 
+    // Prépare une liste triée pour le mode alphabétique
     if (sortAlphabetically) {
       const flatCategories = filteredGroups
         .flatMap((groupBlock: GroupedCategories) => groupBlock.categories)
@@ -170,6 +187,7 @@ export class CategoriesPage implements OnInit {
     }
   }
 
+  // Sélection d'une catégorie
   onCategorySelected(category: Category): void {
     this.selectionState.selectCategory(category);
   }
